@@ -1,4 +1,14 @@
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import * as apiClient from "../api-client";
+
+export type RegisterFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Register = () => {
   const {
@@ -6,10 +16,23 @@ const Register = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<RegisterFormData>();
+
+  const mutation = useMutation(apiClient.register, {
+    onSuccess: () => {
+      console.log("Registration Successful!");
+    },
+    onError: (error: Error) => {
+      console.log("Register/mutation/onError");
+      
+      console.log(error.message);
+    },
+  });
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    
+    mutation.mutate(data);
   });
 
   return (
@@ -22,7 +45,11 @@ const Register = () => {
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("firstName", { required: "this field is required" })}
           />
-          {errors.firstName && <span className="text-red-500">{errors.firstName.message as string}</span>}
+          {errors.firstName && (
+            <span className="text-red-500">
+              {errors.firstName.message as string}
+            </span>
+          )}
         </label>
         <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
@@ -30,7 +57,11 @@ const Register = () => {
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("lastName", { required: "this field is required" })}
           />
-          {errors.lastName && <span className="text-red-500">{errors.lastName.message as string}</span>}
+          {errors.lastName && (
+            <span className="text-red-500">
+              {errors.lastName.message as string}
+            </span>
+          )}
         </label>
       </div>
       <label className="text-gray-700 text-sm font-bold flex-1">
@@ -40,7 +71,9 @@ const Register = () => {
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("email", { required: "this field is required" })}
         />
-        {errors.email && <span className="text-red-500">{errors.email.message as string}</span>}
+        {errors.email && (
+          <span className="text-red-500">{errors.email.message as string}</span>
+        )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Password
@@ -55,7 +88,11 @@ const Register = () => {
             },
           })}
         />
-        {errors.password && <span className="text-red-500">{errors.password.message as string}</span>}
+        {errors.password && (
+          <span className="text-red-500">
+            {errors.password.message as string}
+          </span>
+        )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Confirm Password
@@ -70,7 +107,11 @@ const Register = () => {
             },
           })}
         />
-        {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message as string}</span>}
+        {errors.confirmPassword && (
+          <span className="text-red-500">
+            {errors.confirmPassword.message as string}
+          </span>
+        )}
       </label>
       <span>
         <button
