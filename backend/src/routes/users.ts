@@ -17,11 +17,12 @@ router.post(
     check("lastName", "lastName is required").isString(),
   ],
   async (req: Request, res: Response) => {
-
     try {
       const errors = validationResult(req);
-      if (!errors.isEmpty()) {    
-        return res.status(400).json({ message: JSON.stringify(errors.array()) });
+      if (!errors.isEmpty()) {
+        return res
+          .status(400)
+          .json({ message: JSON.stringify(errors.array()) });
       }
 
       let user = await User.findOne({
@@ -29,7 +30,9 @@ router.post(
       });
 
       if (user)
-        return res.status(400).json({ message: "User with email already exists" });
+        return res
+          .status(400)
+          .json({ message: "User with email already exists" });
       user = new User(req.body);
       await user.save();
 
