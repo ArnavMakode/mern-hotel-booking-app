@@ -16,12 +16,23 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByText("Signed in successfully!")).toBeVisible();
 });
 
-test("should show hotel search results", async ({page}) => {
-    await page.goto(UI_URL);
+test("should show hotel search results", async ({ page }) => {
+  await page.goto(UI_URL);
 
-    await page.getByPlaceholder("where are you going?").fill("Manali");
-    await page.getByRole("button", {name: "Search"}).click();
-    
-    await expect(page.getByText("Hotels found in Manali")).toBeVisible();
-    await expect(page.getByText("The Himalayan Hideaway").first()).toBeVisible();
-})
+  await page.getByPlaceholder("where are you going?").fill("Manali");
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await expect(page.getByText("Hotels found in Manali")).toBeVisible();
+  await expect(page.getByText("The Himalayan Hideaway").first()).toBeVisible();
+});
+
+test("should show hotel details", async ({ page }) => {
+  await page.goto(UI_URL);
+
+  await page.getByPlaceholder("where are you going?").fill("Manali");
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await page.getByText("The Himalayan Hideaway").first().click();
+  await expect(page).toHaveURL(/details/);
+  await expect(page.getByRole("button", { name: "Book Now" })).toBeVisible();
+});

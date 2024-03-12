@@ -17,9 +17,13 @@ const AppContext = createContext<AppContext | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
-  const { isError } = useQuery("validateToken", apiClient.validateToken, {
-    retry: false,
-  });
+  const { isError, isLoading } = useQuery(
+    "validateToken",
+    apiClient.validateToken,
+    {
+      retry: false,
+    }
+  );
 
   return (
     <AppContext.Provider
@@ -27,7 +31,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         showToast: (toastMessage) => {
           setToast(toastMessage);
         },
-        isLoggedIn: !isError,
+        isLoggedIn: !isError && !isLoading,
       }}
     >
       {toast && (
