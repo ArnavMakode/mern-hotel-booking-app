@@ -6,7 +6,7 @@ const MyBookings = () => {
     "fetchMyBookings",
     apiClient.fetchMyBookings
   );
-  
+
   if (!hotels || hotels.length === 0) return <span>No bookings found</span>;
 
   return (
@@ -33,13 +33,15 @@ const MyBookings = () => {
                 <div>
                   <span className="font-bold mr-2">Dates: </span>
                   <span>
-                    {new Date(booking.checkIn).toDateString()} - 
+                    {new Date(booking.checkIn).toDateString()} -
                     {new Date(booking.checkOut).toDateString()}
                   </span>
                 </div>
                 <div>
-                    <span className="font-bold mr-2">Guests: </span>
-                    <span>{booking.adultCount} adults, {booking.childCount} children</span>
+                  <span className="font-bold mr-2">Guests: </span>
+                  <span>
+                    {booking.adultCount} adults, {booking.childCount} children
+                  </span>
                 </div>
               </div>
             ))}
