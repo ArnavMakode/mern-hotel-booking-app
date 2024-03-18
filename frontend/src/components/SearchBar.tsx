@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
   const navigate = useNavigate();
   const search = useSearchContext();
-  const [destination, setDestination] = useState<string>("");
-  const [checkIn, setCheckIn] = useState<Date>(new Date());
-  const [checkOut, setCheckOut] = useState<Date>(new Date());
-  const [adultCount, setAdultCount] = useState<number>(1);
-  const [childCount, setChildCount] = useState<number>(0);
+  const [destination, setDestination] = useState<string>(search.destination);
+  const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
+  const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
+  const [adultCount, setAdultCount] = useState<number>(search.adultCount);
+  const [childCount, setChildCount] = useState<number>(search.childCount);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -91,7 +91,7 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check-in Date"
+          placeholderText="Check-out Date"
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
         />

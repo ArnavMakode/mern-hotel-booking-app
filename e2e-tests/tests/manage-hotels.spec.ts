@@ -59,7 +59,7 @@ test("should display hotels", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByText("Manali, India")).toBeVisible();
   await expect(page.getByText("Hiking Resort")).toBeVisible();
-  await expect(page.getByText("Rs. 3000 per night")).toBeVisible();
+  await expect(page.getByText("₹3000 per night")).toBeVisible();
   await expect(page.getByText("4 adults, 4 children")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "View Details" }).nth(0)

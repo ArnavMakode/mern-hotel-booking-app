@@ -36,3 +36,33 @@ test("should show hotel details", async ({ page }) => {
   await expect(page).toHaveURL(/details/);
   await expect(page.getByRole("button", { name: "Book Now" })).toBeVisible();
 });
+
+test("should book hotel", async ({ page }) => {
+  await page.goto(UI_URL);
+
+  await page.getByPlaceholder("where are you going?").fill("Manali");
+
+  const date = new Date();
+  date.setDate(date.getDate() + 3);
+  const formattedDate = date.toISOString().split("T")[0];
+  await page.getByPlaceholder("Check-out Date").fill(formattedDate);
+
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await page.getByText("The Himalayan Hideaway").first().click();
+  await page.getByRole("button", { name: "Book Now" }).click();
+
+  await expect(page.getByText("Total Cost: ₹9000.00")).toBeVisible();
+
+  const stripeFrame = page.frameLocator("iframe").first();
+  await stripeFrame
+    .locator('[placeholder="Card number"]')
+    .fill("4000 0035 6000 0008");
+  await stripeFrame.locator('[placeholder="MM / YY"]').fill("10/27");
+  await stripeFrame.locator('[placeholder="CVC"]').fill("105");
+
+  await page.getByRole("button", { name: "Confirm Booking" }).click();
+  await expect(page.getByText("Booking Saved!")).toBeVisible({
+    timeout: 20000,
+  });
+});
