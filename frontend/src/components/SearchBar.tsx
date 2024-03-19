@@ -33,13 +33,13 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+      className="-mt-8 p-2 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-2"
     >
       <div className="flex flex-row items-center flex-1 bg-white p-2">
         <MdTravelExplore size={25} className="mr-2" />
         <input
           placeholder="where are you going?"
-          className="text-md w-full"
+          className="text-md w-full max-sm:text-sm"
           value={destination}
           onChange={(event) => setDestination(event.target.value)}
         />
@@ -48,7 +48,7 @@ const SearchBar = () => {
         <label className="flex items-center">
           Adults:
           <input
-            className="w-full p-1 focus:outline-none font-bold"
+            className="w-full p-1 focus:outline-none font-bold max-sm:text-sm"
             type="number"
             min={1}
             max={10}
@@ -59,7 +59,7 @@ const SearchBar = () => {
         <label className="flex items-center">
           Children:
           <input
-            className="w-full p-1 focus:outline-none font-bold"
+            className="w-full p-1 focus:outline-none font-bold max-sm:text-sm"
             type="number"
             min={0}
             max={10}
@@ -78,7 +78,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="min-w-full bg-white p-2 focus:outline-none max-sm:text-sm"
           wrapperClassName="min-w-full"
         />
       </div>
@@ -92,15 +92,15 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="min-w-full bg-white p-2 focus:outline-none max-sm:text-sm"
           wrapperClassName="min-w-full"
         />
       </div>
       <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
+        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold max-sm:text-sm text-xl hover:bg-blue-500">
           Search
         </button>
-        <button className="w-2/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button className="w-2/3 bg-red-600 text-white h-full p-2 font-bold max-sm:text-sm text-xl hover:bg-red-500">
           Clear
         </button>
       </div>

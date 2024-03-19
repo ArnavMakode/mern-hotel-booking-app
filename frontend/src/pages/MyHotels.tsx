@@ -34,24 +34,23 @@ const MyHotels = () => {
             >
               <h2 className="text-2xl font-bold">{hotel.name}</h2>
               <div className="whitespace-pre-line">{hotel.description}</div>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-5 gap-2 max-sm:grid-cols-3">
                 <div className="border border-r-slate-300 rounded-sm p-3 flex items-center">
                   <BsMap className="mr-1" />
                   {hotel.city}, {hotel.country}
                 </div>
-                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center">
+                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center max-sm:p-1">
                   <BsBuilding className="mr-1" />
                   {hotel.type}
                 </div>
-                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center">
-                  <BiMoney className="mr-1" />
-                  Rs. {hotel.pricePerNight} per night
+                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center max-sm:p-1">
+                  <BiMoney className="mr-1" />₹{hotel.pricePerNight} per night
                 </div>
-                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center">
+                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center max-sm:p-1">
                   <BiHotel className="mr-1" />
                   {hotel.adultCount} adults, {hotel.childCount} children
                 </div>
-                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center">
+                <div className="border border-r-slate-300 rounded-sm p-3 flex items-center max-sm:p-1">
                   <BiStar className="mr-1" />
                   {hotel.starRating} star hotel
                 </div>
