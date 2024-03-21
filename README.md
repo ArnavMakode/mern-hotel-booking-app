@@ -6,13 +6,14 @@ Welcome to HotelBooking.com, a MERN stack project where users can view, book, ad
 
 HotelBooking.com provides users with a seamless experience to explore various hotels, make bookings, and manage their bookings effectively.
 
-## Features
-
-- User Authentication
-- View different hotels
-- Book hotels
-- Add new hotels
-- Edit existing hotels
+## Key Features of Our Booking App:
+1. **User Authentication**: Implemented secure login and registration using HTTP cookies and JWT for a seamless user experience.
+2. **Hotel Management**: Implemented adding, editing, and viewing hotels. Everything from handling form inputs to managing state was covered.
+3. **Image Uploads**: Integrated image uploads with Cloudinary.
+4. **Search, Sort, & Filter**: Enhanced the user experience with functionalities to search, sort, and filter hotels, making it easy for users to find their perfect stay.
+5. **Online Payments**: Integrated Stripe for secure and efficient hotel booking payments.
+6. **Booking Management**: Implemented the feature to view and manage bookings, essential for any booking application.
+7. **Recent Hotels on Home Page**: Displayed recently added hotels on the home page, keeping the content dynamic and engaging.
 
 ## Visit the Website
 
