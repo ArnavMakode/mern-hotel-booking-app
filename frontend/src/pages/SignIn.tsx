@@ -26,8 +26,8 @@ const SignIn = () => {
       await queryClient.invalidateQueries("validateToken");
       navigate(location.state?.from?.pathname || "/");
     },
-    onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+    onError: () => {
+      showToast({ message: "Couldn't login!", type: "ERROR" });
     },
   });
 
