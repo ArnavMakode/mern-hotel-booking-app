@@ -16,10 +16,10 @@ const Booking = () => {
 
   useEffect(() => {
     if (search.checkIn && search.checkOut) {
-      const nights =
+      let nights =
         Math.abs(search.checkOut.getTime() - search.checkIn.getTime()) /
         (1000 * 60 * 60 * 24);
-
+      nights = nights > 0 ? nights : 1;
       setNumberOfNights(Math.ceil(nights));
     }
   }, [search.checkIn, search.checkOut]);

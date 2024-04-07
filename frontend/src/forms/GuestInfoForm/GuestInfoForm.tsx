@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 type Props = {
   hotelId: string;
@@ -39,9 +40,15 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
 
+  useEffect(() => {
+    if (checkOut <= checkIn) {
+      const newDate = new Date(checkIn);
+      newDate.setDate(checkIn.getDate() + 1);
+      setValue("checkOut", newDate);
+    }
+  }, []);
+
   const minDate = new Date();
-  const checkOutMin = new Date(checkIn);
-  checkOutMin.setDate(checkOutMin.getDate() + 1);
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
@@ -64,6 +71,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.adultCount,
       data.childCount
     );
+
     navigate(`/hotel/${hotelId}/booking`);
   };
 
@@ -80,7 +88,13 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={checkIn}
-              onChange={(date) => setValue("checkIn", date as Date)}
+              onChange={(date) => {
+                if (!date) return;
+                setValue("checkIn", date as Date);
+                const newDate = new Date(date);
+                newDate.setDate(date.getDate() + 1);
+                if (date >= checkOut) setValue("checkOut", newDate);
+              }}
               selectsStart
               startDate={checkIn}
               endDate={checkOut}
@@ -92,12 +106,15 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             />
             <DatePicker
               required
-              selected={checkOutMin}
-              onChange={(date) => setValue("checkOut", date as Date)}
+              selected={checkOut}
+              onChange={(date) => {
+                if (!checkIn || !date) return;
+                if (date > checkIn) setValue("checkOut", date as Date);
+              }}
               selectsStart
               startDate={checkIn}
               endDate={checkOut}
-              minDate={checkOutMin}
+              minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
               className="min-w-full bg-white p-2 focus:outline-none"
@@ -121,11 +138,6 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                   })}
                 />
               </label>
-              {errors.adultCount && (
-                <span className="text-red-500 font-semibold text-sm">
-                  {errors.adultCount.message}
-                </span>
-              )}
               <label className="flex items-center">
                 Children:
                 <input
@@ -134,11 +146,22 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                   min={0}
                   max={10}
                   {...register("childCount", {
+                    required: "this field is required",
                     valueAsNumber: true,
                   })}
                 />
               </label>
             </div>
+            {errors.adultCount && (
+              <span className="text-red-500 font-semibold text-sm">
+                {errors.adultCount.message}
+              </span>
+            )}
+            {errors.childCount && (
+              <span className="text-red-500 font-semibold text-sm">
+                {errors.childCount.message}
+              </span>
+            )}
           </div>
           <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
             {isLoggedIn ? "Book Now" : "Sign in to book"}
