@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 type Props = {
   hotelId: string;
@@ -39,14 +38,6 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
 
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
-
-  useEffect(() => {
-    if (checkOut <= checkIn) {
-      const newDate = new Date(checkIn);
-      newDate.setDate(checkIn.getDate() + 1);
-      setValue("checkOut", newDate);
-    }
-  }, []);
 
   const minDate = new Date();
   const maxDate = new Date();
