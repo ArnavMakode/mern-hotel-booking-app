@@ -91,9 +91,9 @@ const DetailsSection = () => {
             </option>
           ))}
         </select>
-        {errors.pricePerNight && (
+        {errors.starRating && (
           <span className="text-red-500 text-sm font-bold">
-            {errors.pricePerNight.message}
+            {errors.starRating.message}
           </span>
         )}
       </label>

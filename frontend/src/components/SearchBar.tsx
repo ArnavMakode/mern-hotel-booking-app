@@ -28,14 +28,14 @@ const SearchBar = () => {
 
   const minDate = new Date();
   const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() + 1);
+  maxDate.setFullYear(minDate.getFullYear() + 1);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-2 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-2"
+      className="-mt-8 p-1 bg-yellow-400 rounded shadow-md lg:flex grid grid-cols-2 items-center gap-1 w-fit"
     >
-      <div className="flex flex-row items-center flex-1 bg-white p-2">
+      <div className="flex flex-row items-center bg-white p-2">
         <MdTravelExplore size={25} className="mr-2" />
         <input
           placeholder="where are you going?"
@@ -44,7 +44,7 @@ const SearchBar = () => {
           onChange={(event) => setDestination(event.target.value)}
         />
       </div>
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex bg-white px-1 py-1">
         <label className="flex items-center">
           Adults:
           <input
@@ -84,8 +84,8 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none max-sm:text-sm"
-          wrapperClassName="min-w-full"
+          className="bg-white p-2 focus:outline-none max-sm:text-sm w-full"
+          wrapperClassName="w-full"
         />
       </div>
       <div>
@@ -101,18 +101,13 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="min-w-full bg-white p-2 focus:outline-none max-sm:text-sm"
-          wrapperClassName="min-w-full"
+          className="bg-white p-2 focus:outline-none max-sm:text-sm w-full"
+          wrapperClassName="w-full"
         />
       </div>
-      <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold max-sm:text-sm text-xl hover:bg-blue-500">
-          Search
-        </button>
-        <button className="w-2/3 bg-red-600 text-white h-full p-2 font-bold max-sm:text-sm text-xl hover:bg-red-500">
-          Clear
-        </button>
-      </div>
+      <button className="bg-blue-600 text-white h-full p-1 font-bold max-sm:text-sm text-xl hover:bg-blue-500 rounded col-span-full">
+        Search
+      </button>
     </form>
   );
 };

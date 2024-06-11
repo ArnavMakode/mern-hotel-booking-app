@@ -36,27 +36,25 @@ const SearchResultsCard = ({ hotel }: Props) => {
         <div>
           <div className="line-clamp-4">{hotel.description}</div>
         </div>
-        <div className="grid grid-cols-2 items-end whitespace-nowrap">
-          <div className="flex items-center gap-1">
-            {hotel.facilities.slice(0, 3).map((facility) => (
-              <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">
-                {facility}
-              </span>
-            ))}
-            <span className="text-sm">
-              {hotel.facilities.length > 3 &&
-                `+${hotel.facilities.length - 3} more`}
+        <div className="flex items-center gap-1">
+          {hotel.facilities.slice(0, 3).map((facility) => (
+            <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">
+              {facility}
             </span>
-          </div>
-          <div className="flex flex-col gap-1 items-end">
-            <span className="font-bold">₹{hotel.pricePerNight} per night</span>
-            <Link
-              to={`/details/${hotel._id}`}
-              className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
-            >
-              View More
-            </Link>
-          </div>
+          ))}
+          <span className="text-sm">
+            {hotel.facilities.length > 3 &&
+              `+${hotel.facilities.length - 3} more`}
+          </span>
+        </div>
+        <div className="flex gap-4 justify-between items-center">
+          <span className="font-bold">₹{hotel.pricePerNight} per night</span>
+          <Link
+            to={`/details/${hotel._id}`}
+            className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
+          >
+            View More
+          </Link>
         </div>
       </div>
     </div>

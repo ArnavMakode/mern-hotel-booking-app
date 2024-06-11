@@ -8,6 +8,8 @@ import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
+import { CgClose } from "react-icons/cg";
+import { RxDropdownMenu } from "react-icons/rx";
 
 const Search = () => {
   const search = useSearchContext();
@@ -74,18 +76,19 @@ const Search = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
       <button
-        className="bg-gray-300 font-bold w-fit p-1 rounded-l-full fixed right-0 top-[17rem] lg:hidden opacity-30 hover:opacity-80"
+        className="font-bold w-fit p-1 lg:hidden flex items-center gap-2 bg-blue-600 text-white text-lg rounded-3xl px-2 hover:bg-blue-500"
         onClick={switchFilter}
       >
-        filters
+        {filterVisible === "hidden" ? "Show Filters" : "Hide Filters"}
+        {filterVisible === "hidden" ? <RxDropdownMenu /> : <CgClose />}
       </button>
       <div
         className={`rounded-lg border border-slate-300 p-5 h-fit lg:sticky lg:top-10 ${
           filterVisible === "hidden" ? "max-lg:hidden" : ""
         } lg:visible`}
       >
-        <div className="space-y-5">
-          <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
+        <div className="lg:space-y-5 space-y-2">
+          <h3 className="text-lg font-semibold border-b border-slate-300 lg:pb-5 pb-2">
             Filter by:
           </h3>
           <StarRatingFilter
