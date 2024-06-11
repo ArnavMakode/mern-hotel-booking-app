@@ -48,7 +48,7 @@ router.post(
       newHotel.userId = req.userId;
 
       const hotel = new Hotel(newHotel);
-      hotel.save();
+      await hotel.save();
 
       res.status(201).send(hotel);
     } catch (error) {

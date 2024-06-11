@@ -78,9 +78,6 @@ router.get(
       const hotel = await Hotel.findById(id);
       res.status(200).json(hotel);
     } catch (error) {
-      console.log("/hotels/get:id");
-      console.log(id);
-      console.log(error);
       res.status(500).json({ message: "Error fetching this hotel" });
     }
   }
@@ -160,7 +157,6 @@ router.post(
       await hotel.save();
       res.status(200).send();
     } catch (error) {
-      console.log("/:hotelId/bookings error", error);
       res.status(500).json({ message: "Something went wrong" });
     }
   }

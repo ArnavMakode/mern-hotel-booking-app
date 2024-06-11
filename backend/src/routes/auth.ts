@@ -50,8 +50,6 @@ router.post(
 
       return res.status(200).json({ userId: user._id });
     } catch (error) {
-      console.log(`routes/auth erroe:`);
-      
       return res.status(500).json({ message: "Something went wrong" });
     }
   }

@@ -13,7 +13,7 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
 
     const results = hotels.map((hotel) => {
       const userBooking = hotel.bookings.filter(
-        (booking) => (booking.userId === req.userId)
+        (booking) => booking.userId === req.userId
       );
       const hotelWithUserBookings: HotelType = {
         ...hotel.toObject(),
@@ -24,7 +24,6 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
 
     res.status(200).send(results);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Unable to fetch bookings" });
   }
 });
